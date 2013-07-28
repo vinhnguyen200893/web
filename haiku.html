@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>test</title>
+<script type="text/javascript">
+
+var haikuDict = {
+
+    "1":["cat", "dog"],
+    "2":["giraffe"],
+    "3":["iguana"],
+    "4":["armadillo"],
+    "5":["velociraptor"],
+    "6":["siberiantiger"],
+    "7":["pygmyhippopotamus"]
+
+};
+
+var totalWords = Object.keys(haikuDict).length;
+
+function generateHaiku() {
+    function assignSyllables() {
+
+        if (thisLine==1||thisLine==3) {
+            syllablesLeftInLine = 5;
+        } else if(thisLine==2) {
+            syllablesLeftInLine = 7;
+        } else {
+            document.write(haiku);
+            return true;
+        }
+        generateLine();
+    }
+
+    function generateLine() {
+        while (syllablesLeftInLine!==0) {
+            var syllablesInThisWord = (Math.floor(Math.random()*(syllablesLeftInLine))+1).toString();
+            var thisWord = (haikuDict[syllablesInThisWord])[0];
+            haiku+=thisWord+' ';
+            syllablesLeftInLine-=syllablesInThisWord;
+        }
+
+        thisLine +=1;
+        haiku+="<br>";
+        assignSyllables();
+    }
+
+
+    var haiku = "";
+    var thisLine = 1;
+    assignSyllables();
+}
+
+</script>
+</head>
+<body>
+<button onclick="generateHaiku()">Generate</button>
+</body>
+</html>
